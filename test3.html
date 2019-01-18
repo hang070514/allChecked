@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/jquery.min.js"></script>
+    <style>
+        table th {
+            width: 100px;
+            border: 1px solid #eee;
+            text-align: left;
+        }
+        
+        table td {
+            width: 100px;
+            border: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <th><input type="checkbox" id="allSelect"></th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>地址</th>
+        </thead>
+        <tr>
+            <td><input type="checkbox" class="mSelect"></td>
+            <td>zhang</td>
+            <td>25</td>
+            <td>beijing</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="mSelect"></td>
+            <td>wang</td>
+            <td>25</td>
+            <td>shanghai</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="mSelect"></td>
+            <td>li</td>
+            <td>25</td>
+            <td>zhengzhou</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" class="mSelect"></td>
+            <td>zhao</td>
+            <td>35</td>
+            <td>shenzhen</td>
+        </tr>
+    </table>
+    <span>点我</span>
+</body>
+<script>
+    //console.log($("input[type='checkbox']"));
+    console.log($('.mSelect'));
+
+    //实现全选/反选
+    $('#allSelect').on('click', function() {
+        if ($(this).prop('checked')) {
+            //全选
+            $("input[type='checkbox']").prop('checked', true);
+        } else {
+            //反选
+            $("input[type='checkbox']").prop('checked', false);
+        }
+    })
+    $('.mSelect').on('click', function() {
+            //点击之前判断第一个是否被选中，如果选中把它取消
+            if ($('#allSelect').prop('checked')) {
+                $('#allSelect').prop('checked', false);
+            }
+            //console.log($("input:checkbox:checked").length)
+            if ($("input:checkbox:checked").length == $('.mSelect').length) {
+                //如果checkbox选中的数量等于表格中除去第一个checkbox的数量，则把第一个checkbox选中
+                $('#allSelect').prop('checked', true);
+            } else {
+                $('#allSelect').prop('checked', false);
+            }
+        })
+        //点击查看被选中的checkbox
+    $('span').on('click', function() {
+        $('.mSelect').each(function(index, item) {
+            //console.log(index, item);
+            console.log(index, $(this).prop('checked'));
+        })
+    })
+</script>
+
+</html>
